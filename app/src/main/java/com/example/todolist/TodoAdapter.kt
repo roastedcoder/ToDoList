@@ -22,7 +22,6 @@ class TodoAdapter(
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
         holder.textView.text = todos[position].title
         holder.checkBox.isChecked = todos[position].checkBox
-        holder.deleteTitle.isChecked = todos[position].deleteBox
     }
 
     override fun getItemCount(): Int {
@@ -32,10 +31,9 @@ class TodoAdapter(
     inner class TodoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         var textView: TextView = itemView.tvTitleText
         var checkBox: CheckBox = itemView.cbDone
-        var deleteTitle: CheckBox = itemView.cbDelete
 
         init {
-            itemView.cbDelete.setOnClickListener(this)
+            itemView.cbDone.setOnClickListener(this)
         }
 
         override fun onClick(v: View?) {
