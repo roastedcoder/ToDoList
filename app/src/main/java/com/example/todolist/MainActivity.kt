@@ -57,7 +57,16 @@ class MainActivity : AppCompatActivity(), TodoAdapter.OnItemCLickListener {
         }
 
         btnDelete.setOnClickListener {
-            deleteDialog.show()
+            var cnt = 0
+            for(i in todoList.indices) {
+                if(todoList[i].checkBox) {
+                    cnt += 1
+                }
+            }
+            if(cnt != 0) deleteDialog.show()
+            else {
+                Toast.makeText(this, "0 item selected", Toast.LENGTH_SHORT).show()
+            }
         }
     }
     private fun deleteSelected() {
