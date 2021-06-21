@@ -1,5 +1,6 @@
 package com.example.todolist
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -10,13 +11,18 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), TodoAdapter.OnItemCLickListener {
     private var todoList = mutableListOf<Todo>(
-            Todo("Follow me on Instagram", checkBox = false),
-            Todo("Learn about recyclerView", checkBox = false),
-            Todo("Feed my cat", checkBox = false),
-            Todo("Prank my BOSS", checkBox = false),
-            Todo("Eat some curry", checkBox = false),
-            Todo("Ask my crush out", checkBox = false),
-            Todo("Take a shower", checkBox = false),
+            Todo("Follow me on Instagram", false),
+            Todo("Learn about recyclerView", false),
+            Todo("Feed my cat", false),
+            Todo("Prank my BOSS", false),
+            Todo("Eat some curry", false),
+            Todo("Ask my crush out", false),
+            Todo("Take a shower", false),
+            Todo("You can add an item now", false),
+            Todo("Also you can delete from the list", false),
+            Todo("But the app is still in progress", false),
+            Todo("Hopefully we would complete this", false),
+            Todo("that's why I have added so much of dummy data", false)
     )
     private var adapter = TodoAdapter(todoList, this)
 
@@ -25,14 +31,15 @@ class MainActivity : AppCompatActivity(), TodoAdapter.OnItemCLickListener {
         setContentView(R.layout.activity_main)
 
         val deleteDialog = AlertDialog.Builder(this)
-                .setTitle("Do you want to delete?")
-                .setPositiveButton("DELETE") { _, _ ->
-                    deleteSelected()
-                }
-                .setNegativeButton("CANCEL") { _, _ ->
+            .setTitle("Do you want to delete?")
+            .setMessage("Are you sure?")
+            .setPositiveButton("DELETE") { _, _ ->
+                deleteSelected()
+            }
+            .setNegativeButton("CANCEL") { _, _ ->
 
-                }
-                .create()
+            }
+            .create()
 
         rvTodos.adapter = adapter
         rvTodos.layoutManager = LinearLayoutManager(this)

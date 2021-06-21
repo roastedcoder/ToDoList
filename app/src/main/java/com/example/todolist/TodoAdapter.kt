@@ -43,6 +43,7 @@ class TodoAdapter(
             }
         }
     }
+
     interface OnItemCLickListener {
         fun onItemClick(position: Int)
     }
