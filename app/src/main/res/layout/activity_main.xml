@@ -12,11 +12,13 @@
         android:id="@+id/rvTodos"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/etTodo"
-        tools:listitem="@layout/item_todo" />
+        tools:listitem="@layout/item_todo"
+        android:scrollbars="vertical"/>
 
     <EditText
         android:id="@+id/etTodo"
