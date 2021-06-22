@@ -6,50 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvTodos"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@android:color/black"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/etTodo"
         tools:listitem="@layout/item_todo"
-        android:scrollbars="vertical"/>
+        android:nestedScrollingEnabled="true"/>
 
-    <EditText
-        android:id="@+id/etTodo"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:hint="New Todo"
-        android:layout_marginLeft="16dp"
-
-        app:layout_constraintBottom_toBottomOf="@+id/btnDelete"
-        app:layout_constraintEnd_toStartOf="@+id/btnDelete"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btnAddTodo" />
-
-    <Button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAddTodo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add"
-        android:layout_marginRight="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnDelete"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_new_todo"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Delete"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="8dp"
+        android:src="@drawable/ic_delete_todo"
+        android:layout_margin="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

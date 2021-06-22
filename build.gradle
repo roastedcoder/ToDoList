@@ -20,9 +20,6 @@ allprojects {
         jcenter()
 
         // added
-        maven {
-            url "https://maven.google.com"
-        }
     }
 }
 

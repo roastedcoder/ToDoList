@@ -3,16 +3,20 @@ package com.example.todolist
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_todo.view.*
 
 class TodoAdapter(
         private var todos: List<Todo>,
-        private val listener: OnItemCLickListener
+        private val listener: OnItemCLickListener,
 ): RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
+
+    var todoList = ArrayList<Todo>()
+
+    init {
+        todoList = todos as ArrayList<Todo>
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         var view =  LayoutInflater.from(parent.context).inflate(R.layout.item_todo, parent, false)
@@ -47,4 +51,31 @@ class TodoAdapter(
     interface OnItemCLickListener {
         fun onItemClick(position: Int)
     }
+
+//    override fun getFilter(): Filter {
+//        return object : Filter() {
+//            override fun performFiltering(constraint: CharSequence?): FilterResults {
+//                val charSearch = constraint.toString()
+//                todoList = if (charSearch.isEmpty()) {
+//                    todos as ArrayList<Todo>
+//                } else {
+//                    val resultList = ArrayList<Todo>()
+//                    for (row in todos) {
+//                        if (row.title.toLowerCase().contains(constraint.toString().toLowerCase())) {
+//                            resultList.add(row)
+//                        }
+//                    }
+//                    resultList
+//                }
+//                val filterResults = FilterResults()
+//                filterResults.values = todoList
+//                return filterResults
+//            }
+//
+//            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+//                todoList = results?.values as ArrayList<Todo>
+//                notifyDataSetChanged()
+//            }
+//        }
+//    }
 }

@@ -7,5 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!--    added    -->
     <color name="Dark">#0DFFFFFF</color>
+    <color name="newPrimary">#FFC55C</color>
+    <color name="newPrimaryVarient">#FFA500</color>
 </resources>
