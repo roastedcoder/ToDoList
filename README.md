@@ -9,6 +9,19 @@ This app demonstrates the following:
 
 ## ScreenShots:
 
-![](screenshots/splash_screen.jpg)   ![](screenshots/home_screen.jpg)
+### Splash Screen
 
-![](screenshots/add_dialog.jpg)   ![](screenshots/delete_dialog.jpg)
+![](screenshots/splash_screen.jpg)
+
+### Home
+
+![](screenshots/home_screen.jpg)
+
+
+### Add Dialog
+
+![](screenshots/add_dialog.jpg)
+
+### Remove Dialog
+
+![](screenshots/delete_dialog.jpg)
