@@ -15,7 +15,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity: AppCompatActivity(), TodoAdapter.OnItemCLickListener {
+class MainActivity : AppCompatActivity(), TodoAdapter.OnItemCLickListener {
     // dummy data
     var todoList = mutableListOf<Todo>(
             Todo("Follow me on Instagram", false),
@@ -38,14 +38,19 @@ class MainActivity: AppCompatActivity(), TodoAdapter.OnItemCLickListener {
         setTheme(R.style.Theme_ToDoList)
         setContentView(R.layout.activity_main)
 
+        rvTodos.adapter = adapter
+        rvTodos.layoutManager = LinearLayoutManager(this)
+        rvTodos.setHasFixedSize(true)
+
+
         val deleteDialog = AlertDialog.Builder(this)
-            .setTitle("Do you want to remove?")
-            .setMessage("Are you sure?")
-            .setPositiveButton("REMOVE") { _, _ ->
-                deleteSelected()
-            }
-            .setNegativeButton("CANCEL") { _, _ -> }
-            .create()
+                .setTitle("Do you want to remove?")
+                .setMessage("Are you sure?")
+                .setPositiveButton("REMOVE") { _, _ ->
+                    deleteSelected()
+                }
+                .setNegativeButton("CANCEL") { _, _ -> }
+                .create()
 
         val dialogLayout = layoutInflater.inflate(R.layout.input_dialog, null)
         val input = dialogLayout.findViewById<EditText>(R.id.etInput)
@@ -54,35 +59,30 @@ class MainActivity: AppCompatActivity(), TodoAdapter.OnItemCLickListener {
                 .setTitle("Add ToDo")
                 .setIcon(R.drawable.ic_add_todo)
                 .setView(dialogLayout)
-                .setPositiveButton("ADD") {_, _ ->
+                .setPositiveButton("ADD") { _, _ ->
                     var title = input.text.toString()
                     title = title.trim()
 
-                    if(title.isNotEmpty()) {
+                    if (title.isNotEmpty()) {
                         val todo = Todo(title, checkBox = false)
-                        if(!todoList.contains(todo)) {
+                        if (!todoList.contains(todo)) {
                             todoList.add(todo)
                             adapter.notifyItemInserted(todoList.size - 1)
-                        }
-                        else {
+                        } else {
                             Toast.makeText(this, "Already there", Toast.LENGTH_SHORT).show()
                         }
                         input.text.clear()
-                    }
-                    else {
+                    } else {
                         input.text.clear()
                         Toast.makeText(this, "You don't have a todo", Toast.LENGTH_SHORT).show()
                     }
                 }
-                .setNegativeButton("CANCEL") {_, _ ->
+                .setNegativeButton("CANCEL") { _, _ ->
                     input.text.clear()
                 }
                 .create()
 
 
-        rvTodos.adapter = adapter
-        rvTodos.layoutManager = LinearLayoutManager(this)
-        rvTodos.setHasFixedSize(true)
 
         btnAddTodo.setOnClickListener {
             inputDialog.show()
@@ -90,31 +90,31 @@ class MainActivity: AppCompatActivity(), TodoAdapter.OnItemCLickListener {
 
         btnDelete.setOnClickListener {
             var cnt = 0
-            for(i in todoList.indices) {
-                if(todoList[i].checkBox) {
+            for (i in todoList.indices) {
+                if (todoList[i].checkBox) {
                     cnt += 1
                 }
             }
-            if(cnt != 0) deleteDialog.show()
+            if (cnt != 0) deleteDialog.show()
             else {
                 Toast.makeText(this, "0 item selected", Toast.LENGTH_SHORT).show()
             }
         }
     }
+
     private fun deleteSelected() {
-        while(true) {
+        while (true) {
             var letDelete = -1
-            for(i in todoList.indices) {
-                if(todoList[i].checkBox) {
+            for (i in todoList.indices) {
+                if (todoList[i].checkBox) {
                     letDelete = i
                     break
                 }
             }
             Log.d("Delete", "$letDelete")
-            if(letDelete == -1) {
+            if (letDelete == -1) {
                 break
-            }
-            else {
+            } else {
                 todoList.removeAt(letDelete)
                 adapter.notifyItemRemoved(letDelete)
             }
@@ -157,8 +157,8 @@ class MainActivity: AppCompatActivity(), TodoAdapter.OnItemCLickListener {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
-            R.id.actionSearch -> Toast.makeText(this, "Coming Soon...", Toast.LENGTH_SHORT).show()
+        when (item.itemId) {
+            R.id.actionSearch -> Toast.makeText(this, "Search Action Coming Soon...", Toast.LENGTH_SHORT).show()
         }
         return true
     }
