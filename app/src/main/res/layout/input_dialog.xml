@@ -13,6 +13,7 @@
         android:layout_height="match_parent"
         android:hint="Enter Text"
         android:layout_marginHorizontal="8dp"
+        android:lineHeight="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

@@ -1,5 +1,6 @@
 package com.example.todolist
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,74 +9,47 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_todo.view.*
 
 class TodoAdapter(
-        private var todos: List<Todo>,
-        private val listener: OnItemCLickListener,
+        private val context: Context,
+        private val listener: TodoCLickListener,
 ): RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
 
-    var todoList = ArrayList<Todo>()
+    var todoList = ArrayList<dataTodo>()
 
-    init {
-        todoList = todos as ArrayList<Todo>
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
-        var view =  LayoutInflater.from(parent.context).inflate(R.layout.item_todo, parent, false)
-        return TodoViewHolder(view)
+        var viewHolder =  TodoViewHolder(LayoutInflater.from(context).inflate(R.layout.item_todo, parent, false))
+
+        viewHolder.checkBox.setOnClickListener {
+            val position = viewHolder.adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                listener.onItemClicked(todoList[position])
+            }
+        }
+        return viewHolder
     }
 
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
-        holder.textView.text = todos[position].title
-        holder.checkBox.isChecked = todos[position].checkBox
+        holder.textView.text = todoList[position].title
+        var isChecked = false
+        if(todoList[position].checkBox == 1) isChecked = true
+        holder.checkBox.isChecked = isChecked
     }
 
     override fun getItemCount(): Int {
-        return todos.size
+        return todoList.size
     }
 
-    inner class TodoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    inner class TodoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var textView: TextView = itemView.tvTitleText
         var checkBox: CheckBox = itemView.cbDone
-
-        init {
-            itemView.cbDone.setOnClickListener(this)
-        }
-
-        override fun onClick(v: View?) {
-            val position = adapterPosition
-            if(position != RecyclerView.NO_POSITION) {
-                listener.onItemClick(position)
-            }
-        }
     }
 
-    interface OnItemCLickListener {
-        fun onItemClick(position: Int)
+    fun updateList(newList: List<dataTodo>) {
+        todoList.clear()
+        todoList.addAll(newList)
+        notifyDataSetChanged()
     }
-
-//    override fun getFilter(): Filter {
-//        return object : Filter() {
-//            override fun performFiltering(constraint: CharSequence?): FilterResults {
-//                val charSearch = constraint.toString()
-//                todoList = if (charSearch.isEmpty()) {
-//                    todos as ArrayList<Todo>
-//                } else {
-//                    val resultList = ArrayList<Todo>()
-//                    for (row in todos) {
-//                        if (row.title.toLowerCase().contains(constraint.toString().toLowerCase())) {
-//                            resultList.add(row)
-//                        }
-//                    }
-//                    resultList
-//                }
-//                val filterResults = FilterResults()
-//                filterResults.values = todoList
-//                return filterResults
-//            }
-//
-//            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-//                todoList = results?.values as ArrayList<Todo>
-//                notifyDataSetChanged()
-//            }
-//        }
-//    }
+}
+interface TodoCLickListener {
+    fun onItemClicked(dataTodo: dataTodo)
 }
